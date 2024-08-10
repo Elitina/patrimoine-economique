@@ -18,31 +18,34 @@ export default class Flux extends Possession {
   }
 
 
+<<<<<<< HEAD:ui/Patrimoine/src/models/possessions/Flux.js
 getValeur(date) {
 
+=======
+  getValeur(date) {
+>>>>>>> 23599c72b1c1c2aff0f36f8758caf09a8691d0d4:models/possessions/Flux.js
     const nombreDeMois = (debut, dateEvaluation, jourJ) => {
-        
-        let compteur = 0;
-    
-        if (debut.getDate() < jourJ) {
-            compteur++;
-        }
-        
-        if (dateEvaluation.getDate() >= jourJ && !(debut.getFullYear() === dateEvaluation.getFullYear() && debut.getMonth() === dateEvaluation.getMonth())) {
-            compteur++;
-        }
-        
-        let totalMois = (dateEvaluation.getFullYear() - debut.getFullYear()) * 12 + (dateEvaluation.getMonth() - debut.getMonth()) - 1;
-    
-        compteur += Math.max(0, totalMois);
-    
-        return compteur;
-    }
+      let compteur = 0;
 
-    // calcul montant total
+      if (debut.getDate() < jourJ) {
+        compteur++;
+      }
 
-    this.valeur += nombreDeMois(this.dateDebut, date, this.jour) * this.valeurConstante;
+      if (dateEvaluation.getDate() >= jourJ && !(debut.getFullYear() === dateEvaluation.getFullYear() && debut.getMonth() === dateEvaluation.getMonth())) {
+        compteur++;
+      }
 
-    return this.valeur;
+      let totalMois = (dateEvaluation.getFullYear() - debut.getFullYear()) * 12 + (dateEvaluation.getMonth() - debut.getMonth()) - 1;
+
+      compteur += Math.max(0, totalMois);
+
+      return compteur;
+    };
+
+    // Calculer le montant total sans modifier this.valeur
+    const totalMois = nombreDeMois(this.dateDebut, date, this.jour);
+    const montantTotal = totalMois * this.valeurConstante;
+
+    return montantTotal;
   }
 }
